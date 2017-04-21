@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
-
 import pymongo
-from config import DB_CONFIG, DEFAULT_SCORE
 
+from config import DB_CONFIG, DEFAULT_SCORE
 from ISqlHelper import ISqlHelper
 import traceback
 import json
-import codecs
-import chardet
+import time
+import re
+import traceback
+import math
 
 class MongoHelper(ISqlHelper):
     '''''初始化MongoHelper
@@ -16,27 +16,24 @@ class MongoHelper(ISqlHelper):
       self.connection = pymongo.MongoClient('localhost:27017', connect=False)
       self.db=self.connection.db_def
       self.collection=self.db.collection_def
-      print(self.connection)
-      print(self.db)
-      print(self.collection)
+      #print(self.connection)
+      #print(self.db)
+      #print(self.collection)
 
     '''''初始化MongoHelper 数据库
     '''
-    def init_db(self,db):
-      self.db=db
+    def init_db(self,arg0):
+      print('====')
+      self.db=self.connection[arg0]
       print(self.db)
 
     '''''初始化 数据库内 集合
     '''
     def select_colletion(self,arg0):
-      if arg0==("ip_addr"):
-        self.collection=self.db.ip_addr
-        print(self.collection)
-      elif arg0==("ip_addr_req"):
-        self.collection=self.db.ip_addr_req
-        print(self.collection)
-      else:
-        pass
+      print("self.collection")
+      print(self.db[arg0])
+      self.collection=self.db[arg0]
+      print(self.collection)
 
     '''''丢弃 数据库内 集合
     '''
@@ -48,12 +45,13 @@ class MongoHelper(ISqlHelper):
     def insert(self, value=None):
       if value:
         try:
-          self.collection.insert(value)
-          print(value)
+#          print(value)
+          return self.collection.insert(value)
         except:
+          print("====")
+          print(value)
           traceback.print_exc()
           time.sleep(3)
-          pass
 
     '''''删除 数据
     '''
@@ -93,74 +91,176 @@ class MongoHelper(ISqlHelper):
             result = (item['ip'], item['port'], item['score'])
             results.append(result)
         return results
-        
-        
-    ''''' 查询table中，每项所占比例
-    '''
-    def cal_per_of_items(self):
-#      print(self.collection.find_one())
-      projection = {'start':0,'stop':0}
-      total_dict=self.collection.find()
-      total_count=self.collection.find().count()
-      dict_count={}
-      for item in total_dict:
-        country=item['country']
-        prov=item['prov']
-        city=item['city']
-        net=item['net']
-        if country in dict_count:
-          dict_count[country]+=1
-        else:
-          dict_count[country]=1
-        if prov in dict_count:
-          dict_count[prov]+=1
-        else:
-          dict_count[prov]=1
-        if city in dict_count:
-          dict_count[city]+=1
-        else:
-          dict_count[city]=1
-        if net in dict_count:
-          dict_count[net]+=1
-        else:
-          dict_count[net]=1
-#          print(dict_count)
-      f=codecs.open('./cal_per_of_items.txt','a+','utf8')
-      for item in json.dumps(dict_count,ensure_ascii=False).split(','):
-        f.write(item)
-        f.write('\r\n')
-        print(item)
-      f.flush()
-      f.close()      
 
-      '''''      
-      n = 4  
-      matrix = [None]*n  
-      for i in range(len(matrix)):  
-      matrix[i] = [0]*3  
-      print(matrix)  
-      '''
-      
-    ''''' 讲file内容录入数据库,file为ip地址与物理地址对应关系
-    '''    
-    def  insert_File(str):
-      with open(str,'r') as f:
+    def get_ip_req_addr(self):
+        mongohelper.select_colletion("ip_addr_req")
+        with open('../ip2locate/output_ip_addr2.txt','r') as f:
+          lines=f.readlines()
+          for line in lines:
+            #print(line)
+            wds=line.split(',')
+            #[print(wd) for wd in wds]
+            dict={}
+            dict['req_ip']=wds[0]
+            dict['start']=wds[1]
+            dict['stop']=wds[2]
+            dict['country']=wds[3]
+            dict['prov']=wds[4]
+            dict['city']=wds[5]
+            dict['net']=wds[6]
+            mongohelper.insert(dict)    
+
+    def push_lianjia_ershoufang_msg(self):
+        with open('/zhicheng/cdesf.json','r') as f:
+          lines=f.readlines()
+          #print(type(lines))
+          dict={}
+          for line in lines:
+            #print(type(line))
+            line=json.loads(line)
+            #print(type(line))
+            for li in line:
+              dict[li]=line[li]
+            a=self.insert(dict)
+            
+    def push_58_zufang_msg(self):
+      with open('/disk200g/hn/yunying/db/58data2.txt','r') as f:
         lines=f.readlines()
         for line in lines:
-          wds=line.split(',')
-          dict={}
-          dict['req_ip']=wds[0]
-          dict['start']=wds[1]
-          dict['stop']=wds[2]
-          dict['country']=wds[3]
-          dict['prov']=wds[4]
-          dict['city']=wds[5]
-          dict['net']=wds[6]
-          mongohelper.insert(dict)
+          try:
+  #          line=re.sub("\D","",line)
+            line=re.sub("元/月","",line)
+            line=re.sub("-","",line)
+            line=re.sub(r"[(,),\\,\,|]","",line)
+            line=re.sub(r"[\r\n,\n]","",line)
+            words=line.split(" ")
+            cccc=0
+            dict={}
+            list=[]
+            for word in words:
+              word=re.sub(r" ","",word)
+              word=re.sub(r"\r\n","",word)
+              word=re.sub(r"\n","",word)
+              if(word!=""):
+                list.append(word)
+                print('====')
+                print(cccc)
+                print(word)
+                cccc=cccc+1
+            dict['isdivded']=list[0]
+            dict['area']=list[1]
+            dict['name']=list[2]
+            dict['struct']=list[3]
+            dict['sqr']=list[4]
+            dict['areaname']=list[5]
+            dict['subway']=list[6]
+            string=re.sub("\d","",list[7])
+            string=re.sub("今天","",string)
+  #          #print(string)
+            string=re.sub("\D","",list[7])
+            dict['price']=string
+          except:
+#            print(line)
+            traceback.print_exc()
+            continue
+          a=self.insert(dict)
 
+          
+    def get_file_from_db(self):
+        getall=self.collection.find()
+        out_dict={}
+        mongohelper.select_colletion("cdlj_data_divide")
+        for getone in getall:
+          try:
+            dict={}
+#            print(getone)
+            try:
+              mipri=int(getone['mipri'].split('价')[1].split('元')[0])
+            except:
+              traceback.print_exc()
+              print(getone)
+            try:
+              hiorlo=(getone['build'].split('(')[0])
+            except:
+              pass
+            price=getone['price']
+            apartment=getone['house'].split('|')[0].strip()
+            struct=getone['house'].split('|')[1].strip()
+            sqr=getone['house'].split('|')[2].split('平')[0].strip()
+            direction=getone['house'].split('|')[3].strip()
+            try:
+              state=getone['house'].split('|')[4].strip()
+            except:
+              state="其他"
+            try:
+              lift=getone['house'].split('|')[5].strip()
+            except:
+              lift="其他"
+            eyeson=getone['buyer'].split('/')[0].split('人')[0].strip()
+            visit=getone['buyer'].split('/')[1].split('共')[1].split('次')[0].strip()
+            try:
+              area=getone['build'].split(' ')[2].strip()
+            except:
+              print(getone)
+              area="其他"
+            dict['mipri']=mipri
+            dict['hiorlo']=hiorlo
+            dict['price']=price.split(r"\.")[0]
+            dict['apartment']=apartment
+            dict['struct']=struct
+            try:
+              dict['sqr']=math.floor(float(sqr))
+            except:
+              dict['sqr']=0
+            dict['direction']=direction
+            dict['state']=state
+            dict['lift']=lift
+            dict['eyeson']=eyeson
+            dict['visit']=visit
+            dict['area']=area
+            for item in dict.keys():
+              item=item.split("\..*")[0]
+#              print(dict[item])
+              if dict[item] in out_dict:
+                out_dict[str(dict[item])]=out_dict[str(dict[item])]+1
+              else:
+                out_dict[str(dict[item])]=1
+#              print(out_dict[str(dict[item])])
+#            mongohelper.insert(dict)
+ #           print('mongohelper.insert(dict)')
+          except KeyError:
+            print("continue")
+            continue
+            
+    def cal_the_data(self):
+      mongohelper.select_colletion("cdlj_data_divide")
+      getall=self.collection.find()
+      out_dict={}
+      mongohelper.select_colletion("cdlj_analaysis")
+      for getone in getall:
+        for item in getone:
+#          print(item)
+ #         print(type(item))
+  #        print(getone[item])
+          item = str(getone[item]).split(r".")[0]
+   #       print(item)
+          if item in out_dict.keys():
+            out_dict[item]=+1
+          else:
+            out_dict[item]=1
+      for key in out_dict.keys():
+          if "58f9d" in key:
+            continue
+          kv={}
+          kv[key]=out_dict[key]
+          mongohelper.insert(kv)
+#          print(kv)
+      
+    
 if __name__ == '__main__':
   mongohelper=MongoHelper()
-  mongohelper.select_colletion('ip_addr_req')
-  mongohelper.cal_per_of_items()
+  mongohelper.init_db("db_def")
+  mongohelper.select_colletion("cd_er_shou_fang_msg")
+  mongohelper.cal_the_data()
 
 
