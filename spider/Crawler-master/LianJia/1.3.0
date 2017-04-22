@@ -1,0 +1,7 @@
+Fetching package metadata .........
+Solving package specifications: .
+
+# All requested packages already installed.
+# packages in environment at /root/anaconda2:
+#
+scrapy                    1.1.1                    py27_0  
