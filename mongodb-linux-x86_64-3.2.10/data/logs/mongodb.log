@@ -1,0 +1,89 @@
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] MongoDB starting : pid=7951 port=27017 dbpath=../data/db 64-bit host=hm-virtual-machine
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] db version v3.2.10
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] git version: 79d9b3ab5ce20f51c272b4411202710a082d0317
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] modules: none
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] build environment:
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-04-24T17:35:16.098+0800 I CONTROL  [initandlisten] options: { config: "../data/mongodb.conf", net: { port: 27017 }, storage: { dbPath: "../data/db" }, systemLog: { destination: "file", logAppend: true, path: "../data/logs/mongodb.log" } }
+2017-04-24T17:35:16.151+0800 I -        [initandlisten] Detected data files in ../data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-04-24T17:35:16.151+0800 W -        [initandlisten] Detected unclean shutdown - ../data/db/mongod.lock is not empty.
+2017-04-24T17:35:16.151+0800 W STORAGE  [initandlisten] Recovering data from the last clean checkpoint.
+2017-04-24T17:35:16.151+0800 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=4G,session_max=20000,eviction=(threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-04-24T17:35:16.574+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] 
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] 
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] 
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2017-04-24T17:35:16.575+0800 I CONTROL  [initandlisten] 
+2017-04-24T17:35:16.583+0800 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '../data/db/diagnostic.data'
+2017-04-24T17:35:16.583+0800 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+2017-04-24T17:35:16.584+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2017-04-24T17:35:17.023+0800 I FTDC     [ftdc] Unclean full-time diagnostic data capture shutdown detected, found interim file, some metrics may have been lost. OK
+2017-04-24T17:35:32.110+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34744 #1 (1 connection now open)
+2017-04-24T17:43:49.254+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34745 #2 (2 connections now open)
+2017-04-24T17:43:49.302+0800 I NETWORK  [conn2] end connection 127.0.0.1:34745 (1 connection now open)
+2017-04-24T17:53:10.757+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34746 #3 (2 connections now open)
+2017-04-24T17:55:45.420+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34747 #4 (3 connections now open)
+2017-04-24T17:55:45.433+0800 I NETWORK  [conn4] end connection 127.0.0.1:34747 (2 connections now open)
+2017-04-24T17:55:49.592+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34748 #5 (3 connections now open)
+2017-04-24T17:55:49.628+0800 I NETWORK  [conn5] end connection 127.0.0.1:34748 (2 connections now open)
+2017-04-24T17:55:59.442+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34749 #6 (3 connections now open)
+2017-04-24T17:58:02.428+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34750 #7 (4 connections now open)
+2017-04-24T17:58:02.462+0800 I NETWORK  [conn7] end connection 127.0.0.1:34750 (3 connections now open)
+2017-04-24T17:58:25.212+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34751 #8 (4 connections now open)
+2017-04-24T17:58:25.256+0800 I NETWORK  [conn8] end connection 127.0.0.1:34751 (3 connections now open)
+2017-04-24T18:02:45.607+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34754 #9 (4 connections now open)
+2017-04-24T18:02:58.854+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34755 #10 (5 connections now open)
+2017-04-24T18:02:58.891+0800 I NETWORK  [conn10] end connection 127.0.0.1:34755 (4 connections now open)
+2017-04-24T18:05:27.280+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34756 #11 (5 connections now open)
+2017-04-24T18:05:27.289+0800 I NETWORK  [conn11] end connection 127.0.0.1:34756 (4 connections now open)
+2017-04-24T18:06:18.316+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34757 #12 (5 connections now open)
+2017-04-24T18:06:18.329+0800 I NETWORK  [conn12] end connection 127.0.0.1:34757 (4 connections now open)
+2017-04-24T18:06:30.452+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34758 #13 (5 connections now open)
+2017-04-24T18:06:30.466+0800 I NETWORK  [conn13] end connection 127.0.0.1:34758 (4 connections now open)
+2017-04-24T18:06:36.523+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34759 #14 (5 connections now open)
+2017-04-24T18:06:36.538+0800 I NETWORK  [conn14] end connection 127.0.0.1:34759 (4 connections now open)
+2017-04-24T18:07:40.393+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34760 #15 (5 connections now open)
+2017-04-24T18:07:40.408+0800 I NETWORK  [conn15] end connection 127.0.0.1:34760 (4 connections now open)
+2017-04-24T18:10:06.489+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34761 #16 (5 connections now open)
+2017-04-24T18:10:06.498+0800 I NETWORK  [conn16] end connection 127.0.0.1:34761 (4 connections now open)
+2017-04-24T18:10:34.602+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34762 #17 (5 connections now open)
+2017-04-24T18:10:34.617+0800 I NETWORK  [conn17] end connection 127.0.0.1:34762 (4 connections now open)
+2017-04-24T18:12:01.467+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34763 #18 (5 connections now open)
+2017-04-24T18:12:01.478+0800 I NETWORK  [conn18] end connection 127.0.0.1:34763 (4 connections now open)
+2017-04-24T18:12:07.409+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34764 #19 (5 connections now open)
+2017-04-24T18:12:07.421+0800 I NETWORK  [conn19] end connection 127.0.0.1:34764 (4 connections now open)
+2017-04-24T18:14:31.941+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34765 #20 (5 connections now open)
+2017-04-24T18:14:31.950+0800 I NETWORK  [conn20] end connection 127.0.0.1:34765 (4 connections now open)
+2017-04-24T18:20:47.508+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34766 #21 (5 connections now open)
+2017-04-24T18:20:47.516+0800 I NETWORK  [conn21] end connection 127.0.0.1:34766 (4 connections now open)
+2017-04-24T18:21:17.355+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34767 #22 (5 connections now open)
+2017-04-24T18:21:17.374+0800 I NETWORK  [conn22] end connection 127.0.0.1:34767 (4 connections now open)
+2017-04-24T18:21:35.895+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34768 #23 (5 connections now open)
+2017-04-24T18:21:35.906+0800 I NETWORK  [conn23] end connection 127.0.0.1:34768 (4 connections now open)
+2017-04-24T18:22:05.975+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34769 #24 (5 connections now open)
+2017-04-24T18:22:05.992+0800 I NETWORK  [conn24] end connection 127.0.0.1:34769 (4 connections now open)
+2017-04-24T18:22:22.146+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34770 #25 (5 connections now open)
+2017-04-24T18:22:22.155+0800 I NETWORK  [conn25] end connection 127.0.0.1:34770 (4 connections now open)
+2017-04-24T18:22:43.965+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34771 #26 (5 connections now open)
+2017-04-24T18:22:43.978+0800 I NETWORK  [conn26] end connection 127.0.0.1:34771 (4 connections now open)
+2017-04-24T18:22:46.439+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34772 #27 (5 connections now open)
+2017-04-24T18:22:46.452+0800 I NETWORK  [conn27] end connection 127.0.0.1:34772 (4 connections now open)
+2017-04-24T18:22:56.095+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34773 #28 (5 connections now open)
+2017-04-24T18:22:56.107+0800 I NETWORK  [conn28] end connection 127.0.0.1:34773 (4 connections now open)
+2017-04-24T18:23:27.899+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34774 #29 (5 connections now open)
+2017-04-24T18:23:27.933+0800 I NETWORK  [conn29] end connection 127.0.0.1:34774 (4 connections now open)
+2017-04-24T18:23:43.328+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34775 #30 (5 connections now open)
+2017-04-24T18:24:04.619+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34776 #31 (6 connections now open)
+2017-04-24T18:24:04.665+0800 I NETWORK  [conn31] end connection 127.0.0.1:34776 (5 connections now open)
+2017-04-24T18:26:04.104+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34777 #32 (6 connections now open)
+2017-04-24T18:26:04.134+0800 I NETWORK  [conn32] end connection 127.0.0.1:34777 (5 connections now open)
+2017-04-24T18:29:06.162+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34778 #33 (6 connections now open)
+2017-04-24T18:29:06.200+0800 I NETWORK  [conn33] end connection 127.0.0.1:34778 (5 connections now open)
+2017-04-24T19:10:50.532+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34779 #34 (6 connections now open)
+2017-04-24T19:10:50.567+0800 I NETWORK  [conn34] end connection 127.0.0.1:34779 (5 connections now open)
