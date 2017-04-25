@@ -87,3 +87,17 @@
 2017-04-24T18:29:06.200+0800 I NETWORK  [conn33] end connection 127.0.0.1:34778 (5 connections now open)
 2017-04-24T19:10:50.532+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:34779 #34 (6 connections now open)
 2017-04-24T19:10:50.567+0800 I NETWORK  [conn34] end connection 127.0.0.1:34779 (5 connections now open)
+2017-04-25T14:09:18.358+0800 I CONTROL  [main] ***** SERVER RESTARTED *****
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] MongoDB starting : pid=2717 port=27017 dbpath=/disk200g/hn/yunying/mongodb-linux-x86_64-3.2.10/data/db 64-bit host=hm-virtual-machine
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] db version v3.2.10
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] git version: 79d9b3ab5ce20f51c272b4411202710a082d0317
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] modules: none
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] build environment:
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-04-25T14:09:18.366+0800 I CONTROL  [initandlisten] options: { config: "../data/mongodb.conf", net: { port: 27017 }, storage: { dbPath: "/disk200g/hn/yunying/mongodb-linux-x86_64-3.2.10/data/db" }, systemLog: { destination: "file", logAppend: true, path: "/disk200g/hn/yunying/mongodb-linux-x86_64-3.2.10/data/logs/mongodb.log" } }
+2017-04-25T14:09:18.419+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:98 Address already in use for socket: 0.0.0.0:27017
+2017-04-25T14:09:18.419+0800 E NETWORK  [initandlisten]   addr already in use
+2017-04-25T14:09:18.419+0800 E STORAGE  [initandlisten] Failed to set up sockets during startup.
+2017-04-25T14:09:18.419+0800 I CONTROL  [initandlisten] dbexit:  rc: 48

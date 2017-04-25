@@ -8,6 +8,31 @@ import time
 import re
 import traceback
 import math
+import codecs
+
+
+
+def wash(string):
+  string = re.sub(r"[\'\`\{\}\"\[\]\.\-\;\*\/\=]", " ", string)
+  string = re.sub(r"[%\~\^\_\\]", " ", string)
+  string = re.sub(r"  ", " ", string)
+  string = re.sub("[、？，。！～]", " ", string)
+  string = re.sub(r"\'s", " \'s", string)
+  string = re.sub(r"\r", "", string)
+  string = re.sub(r"\n", "", string)
+  string = re.sub(r"\'ve", " \'ve", string)
+  string = re.sub(r"n\'t", " n\'t", string)
+  string = re.sub(r"\'re", " \'re", string)
+  string = re.sub(r"\'d", " \'d", string)
+  string = re.sub(r"\'ll", " \'ll", string)
+  string = re.sub(r",", " , ", string)
+  string = re.sub(r"!", " ! ", string)
+  string = re.sub(r"\(", " \( ", string)
+  string = re.sub(r"\)", " \) ", string)
+  string = re.sub(r"\?", " \? ", string)
+  string = re.sub(r"\s{2,}", " ", string)
+  string = re.sub(r" ", "", string)
+  return string
 
 class MongoHelper(ISqlHelper):
     '''''初始化MongoHelper
@@ -24,8 +49,9 @@ class MongoHelper(ISqlHelper):
     '''
     def init_db(self,arg0):
       print('====')
+      print("init_db")
       self.db=self.connection[arg0]
-      print(self.db)
+#      print(self.db)
 
     '''''初始化 数据库内 集合
     '''
@@ -45,8 +71,10 @@ class MongoHelper(ISqlHelper):
     def insert(self, value=None):
       if value:
         try:
-#          print(value)
-          return self.collection.insert(value)
+          print(value)
+          r = self.collection.insert_one(value)
+          print(r)
+          return(r)
         except:
           print("====")
           print(value)
@@ -254,13 +282,32 @@ class MongoHelper(ISqlHelper):
           kv={}
           kv[key]=out_dict[key]
           mongohelper.insert(kv)
-#          print(kv)
+      
+    def insert_file_2_db(self,db,collections,file,encode,dividechar):
+      once=True
+      print("new mongohelper")
+      mongohelper.init_db(db)
+      mongohelper.select_colletion(collections)
+      f=codecs.open(file,'r',encode)
+      lines=f.readlines()
+      name,value="",""
+      for line in lines:
+        if(once):
+          once=False
+          _li1=line.split(dividechar)
+          name = wash(_li1[0])
+          value = wash(_li1[1])
+          continue
+        dict={}
+        _li2=line.split(dividechar)
+        dict[name] = wash(_li2[0])
+        dict[value] = int(wash(_li2[1]))
+        mongohelper.insert(dict)
+    
       
     
 if __name__ == '__main__':
   mongohelper=MongoHelper()
-  mongohelper.init_db("db_def")
-  mongohelper.select_colletion("cd_er_shou_fang_msg")
-  mongohelper.cal_the_data()
+  mongohelper.insert_file_2_db("db_def", "User_activation_distribution", "./cal_per_of_items.txt", "utf-8", ":")
 
 
